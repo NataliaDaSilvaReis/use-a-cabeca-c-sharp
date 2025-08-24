@@ -1,0 +1,4 @@
+repository "Unity Lab 1 2025-08-23_10-11-34/Unity Lab 1@4674120732883@cloud"
+  path "/"
+    br "/main"
+    co "/main"
