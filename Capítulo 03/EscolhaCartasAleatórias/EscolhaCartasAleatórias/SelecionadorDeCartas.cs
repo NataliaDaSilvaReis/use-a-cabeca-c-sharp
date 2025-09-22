@@ -42,7 +42,7 @@ namespace EscolhaCartasAleatórias
 
         private static string ValorAleatorio()
         {
-            // Sortei um número aleatório entre 1 e 13 e retorna de acordo com o nome da carta do baralho
+            // Sorteia um número aleatório entre 1 e 13 e retorna de acordo com o nome da carta do baralho
             int valor = random.Next(1, 14);
 
             if (valor == 1) return "Ás";
