@@ -1,11 +1,16 @@
-﻿namespace JogoRPG
+﻿using System;
+
+namespace JogoRPG
 {
     internal class Program
     {
+
+        static Random random = new Random();
+
         static void Main(string[] args)
         {
-            DanoDeEspada danoDeEspada = new DanoDeEspada();
-            Random random = new Random();
+
+            DanoDeEspada danoDeEspada = new DanoDeEspada(RolarDado());
 
             while (true)
             {
@@ -16,21 +21,23 @@
                 if (opcao != '0' && opcao != '1' && opcao != '2' && opcao != '3') return;
 
 
-                // Rolar 3d6.
-                int valorDados = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
-                danoDeEspada.Rolar = valorDados;
-
+                danoDeEspada.Rolar = RolarDado();
 
                 // Caso o usuário possuir magia.
-                danoDeEspada.DefinirMagia(opcao == '1' || opcao == '3');
+                danoDeEspada.Magico = (opcao == '1' || opcao == '3');
 
                 // Caso o usuário possuir poder de chama.
-                danoDeEspada.DefinirFlamejante(opcao == '2' || opcao == '3');
+                danoDeEspada.Flamejante = (opcao == '2' || opcao == '3');
 
 
-                Console.WriteLine($"\nRolou {valorDados} por {danoDeEspada.Dano} HP\n");
+                Console.WriteLine($"\nRolou {danoDeEspada.Rolar} por {danoDeEspada.Dano} HP\n");
 
             }
+        }
+
+        private static int RolarDado()
+        {
+            return random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
         }
     }
 }

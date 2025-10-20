@@ -9,45 +9,93 @@ namespace JogoRPG
     internal class DanoDeEspada
     {
 
-        public const int DANO_BASE = 3;
-        public const int DANOS_POR_CHAMA = 2;
+        private const int DANO_BASE = 3;
+        private const int DANOS_POR_CHAMA = 2;
 
-        public int Rolar;
-        public decimal MultiplicadorMagico = 1M;
-        public int DanoFlamejante = 0;
-        public int Dano;
-
+        private int rolar;
+        private bool flamejante;
+        private bool magico;
 
 
-        public void CalcularDano()
+
+        /// <summary>
+        /// O construtor calcula o dano com base nos valores Magico
+        /// e Flamejante padrão, em um dado 3d6 inicial.
+        /// </summary>
+        /// <param name="rolarInicial">Dado inicial 3d6.</param>
+        public DanoDeEspada(int rolarInicial)
         {
-            Dano = (int)(Rolar * MultiplicadorMagico) + DANO_BASE + DanoFlamejante;
+
+            rolar = rolarInicial;
+            CalcularDano();
+
         }
 
 
-        public void DefinirMagia(bool ehMagico)
-        {
-            if (ehMagico)
-            {
-                MultiplicadorMagico = 1.75M;
-            }
-            else
-            {
-                MultiplicadorMagico = 1M;
-            }
 
-            CalcularDano();
+        // Início getters e setters.
+
+        /// <summary>
+        /// Define com set ou obtém com get o dado 3d6.
+        /// </summary>
+        public int Rolar
+        {
+            get { return rolar; }
+            set
+            {
+                rolar = value;
+                CalcularDano();
+            }
         }
 
-
-        public void DefinirFlamejante(bool ehFlamejante)
+        /// <summary>
+        /// True se a espada está em chamas, false do contrário.
+        /// </summary>
+        public bool Flamejante
         {
-            CalcularDano();
-
-            if (ehFlamejante)
+            get { return flamejante; }
+            set
             {
-                Dano += DANOS_POR_CHAMA;
+                flamejante = value;
+                CalcularDano();
             }
+        }
+
+        /// <summary>
+        /// True se a espada é mágica, false do contrário.
+        /// </summary>
+        public bool Magico
+        {
+            get { return magico; }
+            set
+            {
+                magico = value;
+                CalcularDano();
+            }
+        }
+
+        /// <summary>
+        /// Contém o dano calculado.
+        /// </summary>
+        public int Dano { get; private set; }
+
+        // Fim getters e setters.
+
+
+
+        /// <summary>
+        /// Calcula o dano com base nas propriedades atuais.
+        /// </summary>
+        private void CalcularDano()
+        {
+            decimal MultiplicadorMagico = 1M;
+            if (Magico) MultiplicadorMagico = 1.75M;
+
+            Dano = DANO_BASE;
+            Dano = (int)(Rolar * MultiplicadorMagico) + DANO_BASE;
+
+            if (Flamejante) Dano += DANOS_POR_CHAMA;
+
         }
     }
 }
