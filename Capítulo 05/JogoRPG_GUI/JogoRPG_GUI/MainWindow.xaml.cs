@@ -18,25 +18,21 @@ namespace JogoRPG_GUI
     {
 
         Random random = new Random();
-        DanoDeEspada danoDeEspada = new DanoDeEspada();
+        DanoDeEspada danoDeEspada;
 
         public MainWindow()
         {
 
             InitializeComponent();
-            danoDeEspada.DefinirMagia(false);
-            danoDeEspada.DefinirFlamejante(false);
-            RolarDado();
+            danoDeEspada = new DanoDeEspada(RolarDado3d6());
+            MostrarDano();
 
         }
 
         public void RolarDado()
         {
 
-            danoDeEspada.Rolar = random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
-            danoDeEspada.DefinirFlamejante(flamejante.IsChecked.Value);
-            danoDeEspada.DefinirMagia(magico.IsChecked.Value);
-
+            danoDeEspada.Rolar = RolarDado3d6();
             MostrarDano();
 
         }
@@ -58,7 +54,7 @@ namespace JogoRPG_GUI
         private void Flamejante_Marcado(object sender, RoutedEventArgs e)
         {
 
-            danoDeEspada.DefinirFlamejante(true);
+            danoDeEspada.Flamejante = true;
             MostrarDano();
 
         }
@@ -66,7 +62,7 @@ namespace JogoRPG_GUI
         private void Flamejante_Desmarcado(object sender, RoutedEventArgs e)
         {
 
-            danoDeEspada.DefinirFlamejante(false);
+            danoDeEspada.Flamejante = false;
             MostrarDano();
 
         }
@@ -74,7 +70,7 @@ namespace JogoRPG_GUI
         private void Magico_Marcado(object sender, RoutedEventArgs e)
         {
 
-            danoDeEspada.DefinirMagia(true);
+            danoDeEspada.Magico = true;
             MostrarDano();
 
         }
@@ -82,9 +78,14 @@ namespace JogoRPG_GUI
         private void Magico_Desmarcado(object sender, RoutedEventArgs e)
         {
 
-            danoDeEspada.DefinirMagia(false);
+            danoDeEspada.Magico = false;
             MostrarDano();
 
+        }
+
+        private int RolarDado3d6()
+        {
+            return random.Next(1, 7) + random.Next(1, 7) + random.Next(1, 7);
         }
     }
 }
