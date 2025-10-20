@@ -9,18 +9,24 @@ namespace Paintball_Encapsulamento
     internal class ArmaPaintball
     {
 
-        public const int TAMANHO_DO_CARREGADOR = 16;
-
         private int bolas = 0;
-        private int bolasCarregadas = 0;
 
 
+
+        // Método Construtor
+        public ArmaPaintball(int bolas, int tamanhoDoCarregador, bool carregada)
+        {
+
+            this.bolas = bolas;
+            TamanhoDoCarregador = tamanhoDoCarregador;
+            if (!carregada) Recarregar();
+
+        }
 
         // Início dos métodos Getters e Setters.
-        public int GetBolasCarregadas()
-        {
-            return bolasCarregadas;
-        }
+        public int TamanhoDoCarregador { get; private set; }
+
+        public int BolasCarregadas { get; private set; }
 
         public int Bolas
         {
@@ -42,22 +48,22 @@ namespace Paintball_Encapsulamento
 
         public bool SemMunicao()
         {
-            return bolasCarregadas == 0;
+            return BolasCarregadas == 0;
         }
 
         public void Recarregar()
         {
 
-            if (bolas > TAMANHO_DO_CARREGADOR)
+            if (bolas > TamanhoDoCarregador)
             {
 
-                bolasCarregadas = TAMANHO_DO_CARREGADOR;
+                BolasCarregadas = TamanhoDoCarregador;
 
             }
             else
             {
 
-                bolasCarregadas = bolas;
+                BolasCarregadas = bolas;
 
             }
         }
@@ -65,9 +71,9 @@ namespace Paintball_Encapsulamento
         public bool Atirar()
         {
 
-            if (bolasCarregadas == 0) return false;
+            if (BolasCarregadas == 0) return false;
 
-            bolasCarregadas--;
+            BolasCarregadas--;
             bolas--;
 
             return true;
