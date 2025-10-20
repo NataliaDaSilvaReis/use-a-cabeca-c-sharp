@@ -10,6 +10,7 @@
 
             Console.Write($"Carregada [false]: ");
             bool.TryParse(Console.ReadLine(), out bool estaCarregada);
+            Console.WriteLine();
 
             ArmaPaintball arma = new ArmaPaintball(numeroDeBolas, tamanhoDoCarregador, estaCarregada);
 

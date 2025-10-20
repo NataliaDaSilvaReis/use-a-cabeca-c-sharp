@@ -19,7 +19,7 @@ namespace Paintball_Encapsulamento
 
             this.bolas = bolas;
             TamanhoDoCarregador = tamanhoDoCarregador;
-            if (!carregada) Recarregar();
+            if (carregada) Recarregar();
 
         }
 
