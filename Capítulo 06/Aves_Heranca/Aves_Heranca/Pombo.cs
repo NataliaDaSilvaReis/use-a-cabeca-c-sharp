@@ -19,7 +19,11 @@ namespace Aves_Heranca
             for (int i = 0; i < numeroDeOvos; i++)
             {
                 tamanho = random.NextDouble() * 2 + 1;
-                ovos[i] = new Ovo(tamanho, cor);
+
+                if (Ave.random.Next(4) == 0)
+                    ovos[i] = new OvoQuebrado("branco");
+                else
+                    ovos[i] = new Ovo(tamanho, cor);
             }
 
             return ovos;
