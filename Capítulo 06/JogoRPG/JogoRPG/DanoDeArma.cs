@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace JogoRPG
 {
-    internal class DanoDaFlecha
+    internal class DanoDeArma
     {
-        private const decimal MULTIPLICADOR_BASE = 0.35M;
-        private const decimal MULTIPLICADOR_MAGICO = 2.5M;
-        private const decimal DANOS_POR_CHAMA = 1.25M;
-
         private int rolar;
         private bool flamejante;
         private bool magico;
@@ -23,13 +20,17 @@ namespace JogoRPG
         /// e Flamejante padrão, em um dado 3d6 inicial.
         /// </summary>
         /// <param name="rolarInicial">Dado inicial 3d6.</param>
-        public DanoDaFlecha(int rolarInicial)
+        public DanoDeArma(int rolarInicial)
         {
 
             rolar = rolarInicial;
             CalcularDano();
 
         }
+
+
+
+        protected virtual void CalcularDano() { Console.WriteLine("Teste pra ver se chama"); }
 
 
 
@@ -77,23 +78,8 @@ namespace JogoRPG
         /// <summary>
         /// Contém o dano calculado.
         /// </summary>
-        public int Dano { get; private set; }
+        public int Dano { get; protected set; }
 
         // Fim getters e setters.
-
-
-
-        /// <summary>
-        /// Calcula o dano com base nas propriedades atuais.
-        /// </summary>
-        private void CalcularDano()
-        {
-            decimal danoBase = Rolar * MULTIPLICADOR_BASE;
-
-            if (Magico) danoBase *= MULTIPLICADOR_MAGICO;
-            if (Flamejante) Dano = (int)Math.Ceiling(danoBase + DANOS_POR_CHAMA);
-            else Dano = (int)Math.Ceiling(danoBase);
-
-        }
     }
 }

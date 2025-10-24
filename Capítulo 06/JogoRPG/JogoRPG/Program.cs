@@ -8,7 +8,7 @@
         {
 
             DanoDeEspada danoDeEspada = new DanoDeEspada(RolarDado(3));
-            DanoDaFlecha danoDeFlecha = new DanoDaFlecha(RolarDado(1));
+            DanoDeFlecha danoDeFlecha = new DanoDeFlecha(RolarDado(1));
 
             while (true)
             {
